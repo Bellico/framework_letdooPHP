@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+
+<!--
+ * LetDoo PHP : Rapid Development Framework
+ * Design patterns  : MVC
+ * 
+ * @author : MARTIN Franck
+ * @date : 2012
+ * 
+ * @version : 1.0 beta
+
+DOCUMENTATION
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+	<head>
+		<title> Documentation LetDoo PHP </title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<style type="text/css">
+			body{margin: 0; padding: 0;  color: #FFF; font-size: 100%;background: #2F2D26; font-family: 'Times New Roman', 'Calibri', 'Arial', 'Verdana', 'Helvetica', 'sans-serif'}
+			a{color:#000; text-decoration: none;font-weight: bold}
+			a:hover{text-decoration: underline;color:#650617}
+			ul{list-style-type: none}
+			img{border: none}
+			#wrap{width: 95%;margin:20px auto}
+			h1{text-align: center}
+			.content{margin: 30px auto;background: #2B353F;padding: 10px;border-radius:20px;box-shadow: 2px 2px 10px #000}
+			.index{width: 70%;background:#5B5232}
+			.index ol{padding: 20px;margin: 0 50px}
+			.class h3{margin: 15px 0 0 0}
+			.class{background:#3F5266;margin:30px auto;padding:30px;border: 2px #000 solid;width: 70%;}
+			#classContent ul{padding:  0}
+			.mvc{width: 70%;margin: 30px auto}
+			.mvc h2{text-decoration: underline;margin: 50px 0 20px 0}
+			.mvc ul{background: #5B5232;padding: 5px 0 5px 50px; border-radius:10px;color:#000;font-weight: bold;width: 40%;border: 1px #000 solid}
+			.mvc p {font-size: 20px;text-shadow: 2px 2px 3px  #000;text-align: justify}
+			.astuce{background: #2F2D26;padding: 15px;margin: 10px 0}
+			.astuce:before{content:"Astuce : ";color:#FF8C00;text-shadow: 3px 3px 3px #000;font-weight: bold}
+			.code{background: #212121;padding: 15px;color:#DADBB1;box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.8) inset;font-family: "courier new";border-radius: 4px}
+			.desc{background: #aba763;width: 100%;margin: 30px auto;border-radius: 0 0 4px 4px;}
+			.desc p{padding: 0 0 10px 15px; color: #000}
+			.desc .headD{background: #5B5232; padding: 5px 0 5px 15px; border: 3px #000 solid; box-shadow: 0px 0px 2px #000}
+			.desc .headD h3{margin: 0}
+			.desc .headD span{color: #650617}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			
+			<div class="content">
+				<h1>LetDoo PHP</h1>
+				<h3>Framework PHP Personnel </h3>
+				<h3>Auteur : Martin Franck</h3>
+				<h3>Dernière Mise à jour : 25/03/2012</h3>
+				<h3>Version : 1.0 beta</h3>
+				<h3>Design patterns  : MVC (Modèle Vue Controlleur)</h3>
+				<h3> Plus d'infos : <a href = "mailto:franck.martin12@hotmail.com">franck.martin12@hotmail.com </a> </h3>
+			</div>
+			
+			<div class="content index">
+				<h1>Index</h1>
+				<ol>
+					<li><a href="#presentation">Presentation</a></li>
+					<li><a href="#aide">Structure et utilisation</a></li>
+					<li><a href="#class">Class List</a>
+						<ol>
+							<li><a href="#classCore">Class Core</a></li>
+							<li><a href="#classRooter">Class Rooter</a></li>
+							<li><a href="#classController">Class Controller</a></li>
+							<li><a href="#classModel">Class Model</a></li>
+							<li><a href="#classDatabase">Class Database</a></li>
+						</ol>
+					</li>
+					<li><a href="#classContent">Class Content</a></li>
+					<li><a href="#lib">Librairies</a></li>
+				</ol>
+			</div>
+			
+			<div class="content" id="presentation">
+				<h1>Presentation</h1>
+					<div class="mvc">
+						<p>
+							LetDoo PHP est un framework qui fonctionne sous un modèle MVC. <br />
+							Il est inspiré des fondamentaux du célebre MVC "Cake PHP" et personnalisé pour répondre à des besoins personnels.
+						</p>
+						<p>
+							LetDoo PHP dispose de quelques librairies PHP et Javascript pour  réaliser vos traitements éssentiels en quelques lignes.
+						</p>
+						<p>LetDoo PHP est optimisé pour une relation avec base MySql. Si vous utilisé un autre SGBD, certaine fonctionnalités seront non fonctionnels.</p>
+					</div>
+			</div>
+			
+			<div class="content" id="aide">	
+				<h1>Structure et utilisation</h1>
+				<div class="mvc">
+					<div class="bloc">
+						<h2>Le Framework LetDoo PHP </h2>
+						<ul>
+							<li>controller</li>
+							<li>core</li>
+							<li>model</li>
+							<li>view</li>
+							<li>webroot
+								<ul>
+									<li>css</li>
+									<li>img</li>
+									<li>js</li>
+									<li>index.php</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+
+					<div class="bloc">
+						<h2>Dossier Controller</h2>
+						<p>
+							Dans le dossier controller, sera placés les controllers de l'utilisateur. <br />
+							C'est ici que tous les traitements et initialisations de variables se feront. <br />
+							Le nom du fichier doit respecter la convention suivante : "nomController.php". <br />
+							La class hérite du controller principal, le nom de la class doit être le même que celui du fichier mais doit commencer par une majuscule.
+						</p>
+						<div class="code">
+							class NomController extends Controller{ <br />}
+						</div>
+						
+						<h2>Que faire dans un controller?</h2>
+						<p>
+							Tous les traitements nécéssaires liés à la vue associée: 
+						</p>
+						<ol>
+							<li>- Traitement des données utilisateurs </li>
+							<li>- Lire / Ecrire dans la base de données avec l'utilisation de model </li>
+							<li>- Gérer les connexions / déconnexions </li>
+							<li>- etc.... </li>
+						</ol>
+
+						<p>
+							Vous aurez accés aux méthodes du controller principal qui permettent notamment:
+						</p>
+						<ol>
+							<li>De charger un modèle de table pour dialoguer avec la base donnée</li>
+							<li>D'utiliser les librairies</li>
+							<li>Définir les variables à transmettre à la vue</li>
+						</ol>
+					</div>
+					
+					<div class="bloc">
+						<h2>Qu'est-ce qu'un model?</h2>
+						<p>
+							C'est une class qui effectueras la connexion avec la base de donnée ciblée. <br />
+							Elle présente un certain de nombre de méthodes qui permettent d'effectuer des requètes SQL rapidement et simplement.
+						</p>
+					</div>
+					
+					<div class="bloc">
+						<h2>Dossier Core</h2>
+						<p>
+							Le dossier core n'a pas raison d'être modifié par l'utilisateur (sauf la config). Il contient les routines du MVC. <br />
+							Vous pouvez en savoir plus sur le contenu dans le chapitre "Class List"
+						</p>
+					</div>
+					
+					<div class="bloc">
+						<h2>Dossier Model</h2>
+						<p>
+							C'est ici que vous pourrez définir de nouveaux models spécifiques, effectuants des actions particulières par rapport à une table.  <br />
+							La class hérite du model principal, le nom de la class doit être le même que celui du fichier mais doit commencer par une majuscule.
+						</p>
+											
+						<div class="code">
+							class Table extends Model {  <br /><br />
+								var $table="maTable"; <br />
+								var $primary_key="IdTable"; <br />
+							}
+						</div>
+						
+						<div class="astuce">
+							Créer un nouveau model est utile pour réaliser des actions qui sont propres à la table. <br />
+							Pour réaliser des actions standards, vous pouvez directement appeller le model principal
+						</div>
+					</div>
+					
+					<div class="bloc">
+						<h2>Dossier View</h2>
+						<p>
+							Dans le dossier view, sera placés les vues de l'utilisateur. <br />
+							La vue correspont à la page html affichée, où sera envoyé les données du controller <br />
+							Le nom du fichier doit être le même que le controller auquel il y relié. <br />
+							Exemple: une vue "index.php" sera reliée au controller "indexController.php"
+						</p>
+					
+						<div class="astuce">
+							Un controller n'est pas obligatoirement relié à une vue et peut effectuer des traitements indépendants. Cependant une vue est obligatoirement reliée à un controller.
+						</div>
+					</div>
+					
+						<div class="bloc">	
+						<h2>Que mettre dans une vue?</h2>
+						<p>
+							C'est une page html standart avec peu de code PHP.
+							Le php servira ici notamment à :
+						</p>
+						<ol>
+							<li>- ecrire les variables </li>
+							<li>- faire quelques conditions / itération </li>
+						</ol>
+
+						<p>
+							Vous pouvaient aussi appeller des méthodes comme vous le feriez dans le controller. Il faut garder en tête que nous somme dans le controller et $this correspond au controller appellé.
+						</p>
+					</div>
+					
+					<div class="bloc">
+						<h2>Dossier Webroot</h2>
+						<p>
+							Le dossier webroot est un dossier standart contenant des fichiers css, javascript, image... <br />
+							Le fichier index est le départ de l'application, c'est est ici que tous sera inclus de facon automatique. 
+						</p>
+					</div>
+										
+					<h1>Utilisation</h1>
+					<div class="bloc">
+						<p>
+							Pour afficher une vue, on appelle le controller correspondant: cela ce fait au niveau de l'URL. <br />
+							"http://localhost/DossierSiteWeb/controller" <br />
+							Exemble : "http://localhost/monSite/index" appelle le controller "IndexController.php"
+						</p>
+
+						<div class="astuce">
+							Définissez toujour un controller "IndexController.php", c'est celui appelé par défaut  :  "http://localhost/monSite/"
+						</div>
+
+						<p>
+							Lors de son appel, le controller peut effectuer une action: <br />
+							"http://localhost/DossierSiteWeb/controller/action" <br />
+							Exemble : "http://localhost/monSite/index/deconnexion" appelle l'action "deconnexion" dans controller "IndexController.php" <br />
+						</p>
+
+						<div class="astuce">
+							Un controller dispose de trois actions par défaut qui sont appellées si elle sont définies : <br />
+							"default_action_start" , "default_action_end"  <br />
+							Qui vont s'éxécuter avant et aprés l'action appellée en URL. <br />
+							Et "default_action" qui s'éxécute uniquement si il n'y a pas d'action appellée.
+						</div>
+
+						<p>
+							Une action correspond à une methode définie dans la class du Controller appellé.
+						</p>
+						
+						<div class="code">
+							class IndexController extends Controller{ <br /> <br />
+								public function default_action_start(){  <br />
+									$this->setTitle("Bienvenue sur LetDoo PHP");  <br />
+								}  <br /> <br />
+								public function deconnexion{  <br />
+									$this->using("users")->logOut();  <br />
+								}  <br />
+							}
+						</div>
+						
+						<div class="astuce">
+							Une méthode peut appellée d'autres méthodes
+						</div>
+					</div>
+		
+				</div>	
+			</div>
+			
+			<div class="content" id="class">
+				<h1>Class List</h1>
+				<div class="class" id="classCore">
+					<h2>Class <a href="#Core_content" >Core</a></h2>
+					<ul>
+						<li>
+							<h3>Private Functions</h3>
+							<ul>
+								<li>static bool <a href="#loader" >loader</a>()</li>
+							</ul>
+						</li>
+						<li>
+							<h3>Public Functions</h3>
+							<ul>
+								<li>static bool <a href="#RunApplication" >RunApplication</a> ()</li>
+								<li>static void <a href="#defineError" >defineError</a> ($text,$fatalError=true)</li>
+								<li>static void <a href="#defineInfo" >defineInfo</a> ($text)</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				
+				<div class="class" id="classRooter">
+					<h2>Class <a href="#Rooter_content" >Rooter</a></h2>
+					<ul>
+						<li>
+							<h3>Private Properties</h3>
+							<ul>
+								<li>static <a href="#http_root">http_root</a> : string</li>
+								<li>static <a href="#prefix">prefix</a> : array()</li>
+								<li>static <a href="#webroot">webroot</a> : string</li>
+								<li>static <a href="#core_root">core_root</a> : string</li>
+								<li>static <a href="#view_root">view_root</a> : string</li>
+								<li>static <a href="#controller_root">controller_root</a> : string</li>
+								<li>static <a href="#model_root">model_root</a> : string</li>
+							</ul>
+						</li>
+
+						<li>
+							<h3>Public Functions</h3>
+							<ul>
+								<li>static array <a href="#parseRequest" >parseRequest</a> ()</li>
+								<li>static bool <a href="#loadController" >loadController</a> ($dataRequest)</li>
+								<li>static bool <a href="#setRoot" >setRoot</a> ()</li>
+								<li>static void <a href="#url" >url</a> ($root,$get=null)</li>
+								<li>static string <a href="#getUrl" >getUrl</a> ($root,$get=null)</li>
+								<li>static string <a href="#getCore_root" >getCore_root</a> ()</li>
+								<li>static string <a href="#getView_root" >getView_root</a> ()</li>
+								<li>static string <a href="#getController_root" >getController_root</a> ()</li>
+								<li>static string <a href="#getModel_root" >getModel_root</a> ()</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				
+				<div class="class" id="classController">
+					<h2>abstract Class <a href="#Controller_content" >Controller</a></h2>
+					<ul>
+						<li>
+							<h3>Protected Properties</h3>
+							<ul>
+								<li><a href="#action">action</a> : string</li>
+								<li><a href="#params">params</a> : string</li>
+							</ul>
+						</li>
+						
+						<li>	
+							<h3>Private Properties</h3>
+							<ul>
+								<li><a href="#layout">layout</a> : string</li>
+								<li><a href="#libUsing">libUsing</a> : array()</li>
+								<li><a href="#modelUsing">modelUsing</a> : array()</li>
+								<li><a href="#varView">varView</a> : array()</li>
+								<li><a href="#headerElements">headerElements</a> : array()</li>
+							</ul>
+						</li>
+
+						<li>
+							<h3>Public Functions</h3>
+							<ul>
+								<li><a href="#constructController">__construct</a> ($dataRequest=array())</li>
+							</ul>
+						</li>
+						
+						<li>
+							<h3>Protected Functions</h3>
+							<ul>
+								<li>void <a href="#sendVarView">sendVarView</a>($var,$val="var_unknown")</li>
+								<li>object <a href="#model">model</a> ($table,$dbUsing=null)</li>
+								<li>object <a href="#loadModel">loadModel</a> ($table)</li>
+								<li>object <a href="#using">using</a> ($class,$arg=null)</li>
+								<li>void <a href="#setTitle">setTitle</a> ($title)</li>
+								<li>void <a href="#setLayout">setLayout</a> ($view)</li>
+								<li>void <a href="#no_header">no_header</a> ()</li>
+								<li>void <a href="#redirect">redirect</a> ($link)</li>
+								<li>void <a href="#add_headerElements">add_headerElements</a> ($elements=array())</li>
+								<li>void <a href="#link_headerElements">link_headerElements</a> ()</li>
+							</ul>
+						</li>
+						
+						<li>
+							<h3>Private Functions</h3>
+							<ul>
+								<li>bool <a href="#loadView" >loadView</a> ()</li>
+								<li>void <a href="#debug" >debug</a> ()</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				
+				<div class="class" id="classModel">
+					<h2>Class <a href="#Model_content" >Model</a> extends <a href="#classDatabase">Database</a></h2>
+					<ul>
+						<li>
+							<h3>Protected Properties</h3>
+							<ul>
+								<li><a href="#columns">columns</a> : array()</li>
+								<li><a href="#primary_key">primary_key</a> : string</li>
+								<li><a href="#table">table</a> : string</li>
+							</ul>
+						</li>
+
+						<li>
+							<h3>Public Functions</h3>
+							<ul>
+								<li><a href="#" >__construct</a> ($table,$dbUsing=null)</li>
+								<li>PDO Object <a href="#" >listObject</a> ($limit=null)</li>
+								<li>PDO Object <a href="#" >listObject_OrderBy</a> ($fied,$order=0,$limit=null)</li>
+								<li>bool <a href="#" >enreg_Exist</a> ($field,$val)</li>
+								<li>Object <a href="#" >getValEnreg_OneRow</a> ($fieldVal,$field,$val)</li>
+								<li>PDO Object <a href="#" >getValEnreg_MultiRow</a> ($fieldVal,$field,$val)</li>
+								<li>void <a href="#" >save</a> ($data,$field=null,$val=null)</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</div>
+				
+				<div class="class" id="classDatabase">
+					<h2>Class <a href="#Database_content" >Database</a></h2>
+					<ul>
+						<li>
+							<h3>Protected Properties</h3>
+							<ul>
+								<li><a href="tt">lastSql</a> : string</li>
+								<li><a href="tt">count</a> : int</li>
+								<li><a href="tt">dbUsing</a> : string</li>
+							</ul>
+						</li>
+						
+						<li>
+							<h3>Private Properties</h3>
+							<ul>
+								<li><a href="tt">server</a> : string</li>
+								<li><a href="tt">dbname</a> : string</li>
+								<li><a href="tt">login</a> : string</li>
+								<li><a href="tt">password</a> : string</li>
+								<li>static <a href="tt">connexion</a> : array()</li>
+							</ul>
+						</li>
+
+						<li>
+							<h3>Public Functions</h3>
+							<ul>
+								<li><a href="#" >__construct</a> ($baseInfos=null)</li>
+								<li>int <a href="#" >getCount</a> ()</li>
+								<li>string <a href="#" >getSql</a> ()</li>
+								<li>Object/bool <a href="#" >query</a> ($sql,$type=null)</li>
+								<li>Object/bool <a href="#" >select</a> ($table,$params=array())</li>
+								<li>Object/bool <a href="#" >insert</a> ($table,$listval=array())</li>
+								<li>Object/bool <a href="#" >update</a> ($table,$listval=array() ,$cond=null)</li>
+								<li>array() <a href="#" >getColumnTable</a> ($table)</li>
+							</ul>
+						</li>
+						
+						<li>
+							<h3>Private Functions</h3>
+							<ul>
+								<li>Object <a href="#" >fetch</a> ($resulat,$type)</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+				
+			<div class="content" id="classContent">
+				<h1>Class Content</h1>
+				<div class="class" id="Core_content">
+					<h2>Class <a href="#Core_content" >Core</a></h2>
+					<ul>
+						<li>
+							<h3>Private Functions</h3>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="loader">static bool <span class="name">loader</span> ()</h3>
+								</div>
+								<p>
+									Modules à charger
+								</p>
+							</div>
+
+						</li>
+						<li>
+							<h3>Public Functions</h3>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="RunApplication">static bool <span class="name">RunApplication</span> ()</h3>
+								</div>
+								<p>
+									Initialise et charge les modules
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="defineError">static void <span class="name">defineError</span> ()</h3>
+								</div>
+								<p>
+									Affiche un message d'erreur en mode debug <br />
+									@param $text : Message à afficher <br />
+									@param $fatalError : Vrai si le script doit être arrêté
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="defineInfo">static void <span class="name">defineInfo</span> ()</h3>
+								</div>
+								<p>
+									Affiche un message d'information en mode debug <br />
+									@param $text : Message à afficher
+								</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+				
+				<div class="class" id="Rooter_content">
+					<h2>Class <a href="#Rooter_content" >Rooter</a></h2>
+					<ul>
+						<li>
+							<h3>Private Properties</h3>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="http_root">static <span class="name">http_root</span></h3>
+								</div>
+								<p>
+									URL du serveur 
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="prefix">static <span class="name">prefix</span></h3>
+								</div>
+								<p>
+									 Prefixes des dossiers autorisés
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="webroot">static <span class="name">webroot</span></h3>
+								</div>
+								<p>
+									 Racine dossier Application 
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="core_root">static <span class="name">core_root</span></h3>
+								</div>
+								<p>
+									 Adresse absolue du dossier core
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="view_root">static <span class="name">view_root</span></h3>
+								</div>
+								<p>
+									Adresse absolue du dossier view
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="controller_root">static <span class="name">controller_root</span></h3>
+								</div>
+								<p>
+									Adresse absolue du dossier controller
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="model_root">statict <span class="name">model_root</span></h3>
+								</div>
+								<p>
+									 Adresse absolue du dossier model
+								</p>
+							</div>
+
+						</li>
+						<li>
+							<h3>Public Functions</h3>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="parseRequest">static array() <span class="name">parseRequest</span> ()</h3>
+								</div>
+								<p>
+									Parse l'URL entrée et définit le controller et l'action à appeler <br />
+									 @return (array) Tableau prefix/controller/action/paramètres
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="loadController">static bool <span class="name">loadController</span> ()</h3>
+								</div>
+								<p>
+									Charge un controller et lui envoi les données parsés de l'URL <br />
+									@param $dataRequest : données url parsés
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="setRoot">static void <span class="name">setRoot</span> ()</h3>
+								</div>
+								<p>
+									Initialise les adresses root
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="url">static string <span class="name">url</span> ()</h3>
+								</div>
+								<p>
+									Ecrit directement une URL formatées  <br />
+									@param $root : liens du controller/action <br />
+									@param $get  : variables $_GET
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="getUrl">static string <span class="name">getUrl</span> ()</h3>
+								</div>
+								<p>
+									Retourne une URL formatées  <br />
+									@param $root : liens du controller/action <br />
+									@param $get  : variables $_GET
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="getCore_root">static string <span class="name">getCore_root</span> ()</h3>
+								</div>
+								<p>
+									Retourne l'adresse absolue du dossier core
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="getView_root">static string <span class="name">getView_root</span> ()</h3>
+								</div>
+								<p>
+									Retourne l'adresse absolue du dossier view
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="getController_root">static string <span class="name">getController_root</span> ()</h3>
+								</div>
+								<p>
+									Retourne l'adresse absolue du dossier controller
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="getModel_root">static string <span class="name">getModel_root</span> ()</h3>
+								</div>
+								<p>
+									Retourne l'adresse absolue du dossier model
+								</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+				
+				<div class="class" id="Controller_content">
+					<h2>Class <a href="#Controller_content" >Controller</a></h2>
+					<ul>
+						<li>
+							<h3>Protected Properties</h3>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="action"> <span class="name">action</span></h3>
+								</div>
+								<p>
+									L'action à appeller
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="params"> <span class="name">params</span></h3>
+								</div>
+								<p>
+									Paramètres facultatifs qui accompagent l'action
+								</p>
+							</div>
+						</li>
+						<li>
+							<h3>Private Properties</h3>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="header"><span class="name">header</span></h3>
+								</div>
+								<p>
+									Détermine si on affiche les header
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="layout"><span class="name">layout</span></h3>
+								</div>
+								<p>
+									Layout sur lequel repose la vue
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="libUsing"><span class="name">libUsing</span></h3>
+								</div>
+								<p>
+									Librairies utilisées au sein du controller 
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="modelUsing"><span class="name">modelUsing</span></h3>
+								</div>
+								<p>
+									Model de table chargés au sein du controller 
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="varView"><span class="name">varView</span></h3>
+								</div>
+								<p>
+									Données envoyées à la vue
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="headerElements"><span class="name">headerElements</span></h3>
+								</div>
+								<p>
+									 Eléments (js/css) attachés à la page
+								</p>
+							</div>
+						</li>
+						<li>
+							<h3>Public Functions</h3>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="constructController"><span class="name">__construct</span> ()</h3>
+								</div>
+								<p>
+									Appelle l'action demandée et charge la vue <br />
+									@param $dataRequest : données parsés par le rooter
+								</p>
+							</div>					
+						</li>
+						<li>
+							<h3>Protected Functions</h3>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="sendVarView">void <span class="name">sendVarView</span> ()</h3>
+								</div>
+								<p>
+									Définit une nouvelle variable qui sera envoyée à la vue <br />
+									@param $var : valeur <br />
+									@param $val : nom  
+								</p>
+								<div class="code">
+									Dans le controller hérité:  <br />
+									$variable="Hello"; <br />
+									$this->sendVarView($variable,"NomVariable"); <br /><br />
+									Dans la vue : <br />
+									echo $NomVariable; 
+								</div>
+							</div>					
+							<div class="desc">
+								<div class="headD">
+									<h3 id="model">object <span class="name">model</span> ()</h3>
+								</div>
+								<p>
+									Renvoi un objet Model ou instancie un nouveau  <br />
+									@param $table : table de la BDD <br />
+									@param $dbUsing : BDD à utilisée <br />
+									@return Objet type Model  <br />
+								</p>
+								<div class="code">
+									$this->model("maTable")->methodeDuModel();
+								</div>
+							</div>					
+							<div class="desc">
+								<div class="headD">
+									<h3 id="loadModel">void <span class="name">loadmodel</span> ()</h3>
+								</div>
+								<p>
+									Instancie un nouveau model personnel<br />
+									@param $model : nom du model <br />
+								</p>
+								<div class="code">
+									$this->loadmodel("monModel"); <br />
+									$this->monModel->methodeDuModel();
+								</div>
+							</div>					
+							<div class="desc">
+								<div class="headD">
+									<h3 id="using">object <span class="name">using</span> ()</h3>
+								</div>
+								<p>
+									Renvoi un objet correspondant à la class librairie visée ou instancie un nouveau <br />
+									@param $class : class librairie <br />
+									@param $arg : paramètres éventuels <br />
+									@return Objet 
+								</p>
+								<div class="code">
+									$this->using("nomLibraire")->methodeLibrairie();
+								</div>
+							</div>					
+							<div class="desc">
+								<div class="headD">
+									<h3 id="setTitle">void <span class="name">setTitle</span> ()</h3>
+								</div>
+								<p>
+									Modifie le titre de la page HTML <br />
+									@param $title : nouveau titre <br />
+									Par défaut, le nom se compose comme suit : "NomController | Nom Appli" 
+								</p>
+								<div class="code">
+									$this->setTitle("Nom de ma Page");
+								</div>
+							</div>					
+							<div class="desc">
+								<div class="headD">
+									<h3 id="setView">void <span class="name">setView</span> ()</h3>
+								</div>
+								<p>
+									Définie une nouvelle vue à afficher <br />
+									@param $view  : vue 
+								</p>
+								<div class="code">
+									$this->setView("index");
+								</div>
+							</div>					
+							<div class="desc">
+								<div class="headD">
+									<h3 id="setLayout">void <span class="name">setLayout</span> ()</h3>
+								</div>
+								<p>
+									Définie un nouveau layout pour la vue <br />
+									@param $layout  : layout
+								</p>
+								<div class="code">
+									$this->setLayout("layouts/monLayout");
+								</div>
+							</div>					
+							<div class="desc">
+								<div class="headD">
+									<h3 id="no_header">void <span class="name">no_header</span> ()</h3>
+								</div>
+								<p>
+									 Permet de charger directement la vue sans le layout
+								</p>
+							</div>					
+							<div class="desc">
+								<div class="headD">
+									<h3 id="redirect">void <span class="name">redirect</span> ()</h3>
+								</div>
+								<p>
+									Redirige vers une page <br />
+									@param $link  : lien
+								</p>
+							</div>					
+							<div class="desc">
+								<div class="headD">
+									<h3 id="add_headerElements">void <span class="name">add_headerElements</span> ()</h3>
+								</div>
+								<p>
+									Définit un nouvel élement (js ou css) qui sera ajouté au header <br />
+									@param $elements : tableau d'élément "nom"=>"type"
+								</p>
+								<div class="code">
+									$this->add_headerElements(array( <br />
+										"style"=>"css", <br />
+										"monScript"=>"js" <br />
+									));
+								</div>
+							</div>					
+							<div class="desc">
+								<div class="headD">
+									<h3 id="link_headerElements">void <span class="name">link_headerElements</span> ()</h3>
+								</div>
+								<p>
+									Affiche les liens formatés des élements du header
+								</p>
+							</div>					
+						</li>
+						<li>
+							<h3>Private Functions</h3>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="loadView">bool <span class="name">loadView</span> ()</h3>
+								</div>
+								<p>
+									Charge la vue en envoyant les données
+								</p>
+							</div>					
+							<div class="desc">
+								<div class="headD">
+									<h3 id="debug">void <span class="name">debug</span> ()</h3>
+								</div>
+								<p>
+									Affiche le mode debug en début de page <br />
+									Permet de visualiser les variables envoyées à la vue et les variables SESSION, GET , POST
+								</p>
+							</div>					
+						</li>
+					</ul>
+				</div>
+		
+				<div class="class" id="Model_content">
+					<h2>Class <a href="#Model_content" >Model</a></h2>
+					<ul>
+						<li>
+							<h3>Protected Properties</h3>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="columns"> <span class="name">columns</span> </h3>
+								</div>
+								<p>
+									Affiche le mode debug en début de page <br />
+									Permet de visualiser les variables envoyées à la vue et les variables SESSION, GET , POST
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="primary_key"> <span class="name">primary_key</span> </h3>
+								</div>
+								<p>
+									Affiche le mode debug en début de page <br />
+									Permet de visualiser les variables envoyées à la vue et les variables SESSION, GET , POST
+								</p>
+							</div>
+							<div class="desc">
+								<div class="headD">
+									<h3 id="table"> <span class="name">table</span> </h3>
+								</div>
+								<p>
+									Affiche le mode debug en début de page <br />
+									Permet de visualiser les variables envoyées à la vue et les variables SESSION, GET , POST
+								</p>
+							</div>
+						</li>
+						
+						<li>
+							<h3>Public Functions</h3>
+							<h1>A faire</h1>
+						</li>
+					</ul>
+				</div>
+				
+				<div class="class" id="Database_content">
+					<h2>Class <a href="#Database_content" >Database</a></h2>
+					<ul>
+						<li>
+							<h3>Protected Properties</h3>
+							<h1>A faire</h1>
+
+						</li>
+						<li>
+							<h3>Private Properties</h3>
+							<h1>A faire</h1>
+
+						</li>
+						<li>
+							<h3>Public Functions</h3>
+							<h1>A faire</h1>
+						</li>
+						<li>
+							<h3>Private Functions</h3>
+							<h1>A faire</h1>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+			<div class="content" id="lib">
+				<h1>Librairie</h1>
+				
+			</div>
+				
+		</div>
+	</body>
+</html>

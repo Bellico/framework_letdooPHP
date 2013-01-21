@@ -1,0 +1,28 @@
+/*General*/
+body{margin: 0; padding: 0;  color: #FFF; font-size: 100%;background: #5a5a5a;font-family: 'Arial', 'Times New Roman', 'Calibri','Verdana', 'Helvetica', 'sans-serif'}
+img{border: none}
+div.round{
+	margin: 50px;
+	width: 200px;
+	height: 200px;
+	position: relative;
+	border: 1px solid #000;
+}
+div.round input{
+	position: absolute;
+	top: 60px;
+	left: 50px;
+	font-size: 60px;
+	text-align: center;
+	width: 100px;
+	border: none ;
+	background: none;
+	outline: none;
+}
+div.round canvas{
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0
+}
